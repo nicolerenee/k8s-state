@@ -1,0 +1,61 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: radarr
+    component: frontend
+  name: radarr
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: radarr
+        component: frontend
+    spec:
+      containers:
+      - name: radarr
+        image: gcr.io/n10-registry/radarr:0.2.0.1067
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 7878
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+        securityContext:
+          runAsUser: 1024
+        volumeMounts:
+        - mountPath: /config
+          name: data
+        - mountPath: /mnt/movies
+          name: movies
+        - mountPath: /downloads
+          name: downloads
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: radarr
+      - name: movies
+        persistentVolumeClaim:
+          claimName: media-movies
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: media-nzbget

@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start"
+  labels:
+    app: radarr
+    component: frontend
+  name: radarr
+  namespace: media
+spec:
+  rules:
+  - host: radarr.n10.io
+    http:
+      paths:
+      - backend:
+          serviceName: radarr
+          servicePort: 80
+        path: /
+  tls:
+  - hosts:
+    - radarr.n10.io
+    secretName: radarr-tls
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app: radarr
+    component: oauth2-proxy
+  name: radarr-oauth2-proxy
+  namespace: media
+spec:
+  rules:
+  - host: radarr.n10.io
+    http:
+      paths:
+      - backend:
+          serviceName: oauth2-proxy
+          servicePort: 80
+        path: /oauth2
+  tls:
+  - hosts:
+    - radarr.n10.io
+    secretName: radarr-tls
