@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nzbget
+    component: frontend
+  name: nzbget
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nzbget
+      component: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: nzbget
+        component: frontend
+    spec:
+      containers:
+      - name: nzbget
+        image: gcr.io/n10-registry/nzbget:20.0-testing-r2181
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6789
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+        volumeMounts:
+        - mountPath: /config
+          name: data
+        - mountPath: /downloads
+          name: downloads
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: nzbget
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: media-nzbget
