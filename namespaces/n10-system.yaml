@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: n10-system
+  labels:
+    purpose: n10-k8s-infra

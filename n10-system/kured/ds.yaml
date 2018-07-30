@@ -3,13 +3,13 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kured
-  namespace: kube-system
+  namespace: n10-system
 ---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kured            # Must match `--ds-name`
-  namespace: kube-system # Must match `--ds-namespace`
+  namespace: n10-system  # Must match `--ds-namespace`
 spec:
   selector:
     matchLabels:
@@ -30,9 +30,9 @@ spec:
             - /usr/bin/kured
           args:
             - --slack-hook-url=https://hooks.slack.com/services/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
+            - --ds-namespace=n10-system
 #            - --alert-filter-regexp=^RebootRequired$
 #            - --prometheus-url=http://prometheus.monitoring.svc.cluster.local
-#            - --reboot-sentinel=/var/run/reboot-required
 #
 # NO USER SERVICEABLE PARTS BEYOND THIS POINT
           env:
