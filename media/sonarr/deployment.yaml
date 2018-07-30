@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+    component: frontend
+  name: sonarr
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sonarr
+        component: frontend
+    spec:
+      containers:
+      - name: sonarr
+        image: gcr.io/n10-registry/sonarr:2.0.0.5163
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8989
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+        securityContext:
+          runAsUser: 1024
+        volumeMounts:
+        - mountPath: /config
+          name: data
+        - mountPath: /mnt/kids/tv
+          name: kids-tv
+        - mountPath: /mnt/tv
+          name: tv
+        - mountPath: /downloads
+          name: downloads
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: sonarr
+      - name: kids-tv
+        persistentVolumeClaim:
+          claimName: media-kids-tv
+      - name: tv
+        persistentVolumeClaim:
+          claimName: media-tv
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: media-nzbget

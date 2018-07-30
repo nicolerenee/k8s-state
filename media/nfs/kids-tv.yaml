@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-kids-tv
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /volume1/media/kids-tv
+    server: 172.20.1.5
+    readOnly: false
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-kids-tv
+  namespace: media
+spec:
+  volumeName: media-kids-tv
+  accessModes:
+  - ReadWriteMany
+  resources:
+     requests:
+       storage: 1Ti
