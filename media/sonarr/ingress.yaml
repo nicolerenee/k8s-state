@@ -19,7 +19,10 @@ spec:
           serviceName: sonarr
           servicePort: 80
         path: /
-
+  tls:
+  - hosts:
+    - sonarr.n10.io
+    secretName: sonarr-tls
 ---
 
 apiVersion: extensions/v1beta1
