@@ -4,19 +4,24 @@ kind: ServiceAccount
 metadata:
   name: kured
   namespace: kube-system
-
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kured            # Must match `--ds-name`
   namespace: kube-system # Must match `--ds-namespace`
 spec:
+  selector:
+    matchLabels:
+      name: kured
+  updateStrategy:
+   type: RollingUpdate
   template:
     metadata:
       labels:
         name: kured
     spec:
+      serviceAccountName: kured
       containers:
         - name: kured
           image: quay.io/weaveworks/kured:master-5731b98
@@ -25,12 +30,12 @@ spec:
             - /usr/bin/kured
          args:
 #            - --alert-filter-regexp=^RebootRequired$
-           - --ds-name=kured
-           - --ds-namespace=kube-system
-           - --lock-annotation=weave.works/kured-node-lock
-           - --period=1h
+#            - --ds-name=kured
+#            - --ds-namespace=kube-system
+#            - --lock-annotation=weave.works/kured-node-lock
+#            - --period=1h
 #            - --prometheus-url=http://prometheus.monitoring.svc.cluster.local
-           - --reboot-sentinel=/var/run/reboot-required
+#            - --reboot-sentinel=/var/run/reboot-required
            - --slack-hook-url=https://hooks.slack.com/services/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
 #            - --slack-username=prod
 #
