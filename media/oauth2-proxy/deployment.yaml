@@ -34,6 +34,7 @@ spec:
         - --cookie-refresh=1h
         - --email-domain=nicolerenee.io
         - --http-address=0.0.0.0:4180
+        - --upstream=127.0.0.1:80 # This isn't a valid upstream but it needs something to start
         env:
         - name: OAUTH2_PROXY_CLIENT_ID
           valueFrom:
