@@ -1,0 +1,1 @@
+{"jobID":"2c1d284a-63c2-6960-1684-8c332710c5bf","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003cnicole@nicolerenee.io\u003e"},"spec":{"flux:deployment/fluxcloud":{"add":{"tag_all":"glob:master-*"},"remove":{}}}},"result":null}
