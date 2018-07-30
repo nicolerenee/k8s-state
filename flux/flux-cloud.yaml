@@ -17,6 +17,8 @@ kind: Deployment
 metadata:
   name: fluxcloud
   namespace: flux
+  annotations:
+    flux.weave.works/tag.fluxcloud: glob:master-*
 spec:
   replicas: 1
   strategy:
