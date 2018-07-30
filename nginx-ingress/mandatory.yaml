@@ -1,6 +1,5 @@
 # https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml
 # Last updated from source 2018-07-29
-# NOTE: When updating remove the service definition
 ---
 
 apiVersion: v1
@@ -49,7 +48,21 @@ spec:
           requests:
             cpu: 10m
             memory: 20Mi
+---
 
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-http-backend
+  namespace: ingress-nginx
+  labels:
+    app: default-http-backend
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: default-http-backend
 ---
 
 kind: ConfigMap
