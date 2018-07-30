@@ -19,6 +19,7 @@ metadata:
   namespace: flux
   annotations:
     flux.weave.works/tag.fluxcloud: glob:master-*
+    flux.weave.works/automated: 'true'
 spec:
   replicas: 1
   strategy:
