@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        - name: kured
+        name: kured
     spec:
       serviceAccountName: kured
       containers:
@@ -28,16 +28,11 @@ spec:
           imagePullPolicy: IfNotPresent
           command:
             - /usr/bin/kured
-         args:
+          args:
+            - --slack-hook-url=https://hooks.slack.com/services/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
 #            - --alert-filter-regexp=^RebootRequired$
-#            - --ds-name=kured
-#            - --ds-namespace=kube-system
-#            - --lock-annotation=weave.works/kured-node-lock
-#            - --period=1h
 #            - --prometheus-url=http://prometheus.monitoring.svc.cluster.local
 #            - --reboot-sentinel=/var/run/reboot-required
-           - --slack-hook-url=https://hooks.slack.com/services/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
-#            - --slack-username=prod
 #
 # NO USER SERVICEABLE PARTS BEYOND THIS POINT
           env:
