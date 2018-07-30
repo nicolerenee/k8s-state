@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       labels:
-        name: kured
+        - name: kured
     spec:
       serviceAccountName: kured
       containers:
