@@ -5,6 +5,8 @@ metadata:
   namespace: ingress-nginx
 spec:
   type: NodePort
+  #This will preserve the source IP for external traffic. However it means only nodes with an instance of ingress-nginx can receive traffic
+  externalTrafficPolicy: Local
   ports:
   - name: http
     port: 80
