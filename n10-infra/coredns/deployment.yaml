@@ -1,0 +1,71 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: coredns
+  name: coredns
+# namespace: n10-infra
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coredns
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: coredns
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: coredns
+        image: coredns/coredns:1.2.0
+        args:
+        - -conf
+        - /etc/coredns/Corefile
+        ports:
+        - containerPort: 53
+          name: dns
+          protocol: UDP
+        - containerPort: 53
+          name: dns-tcp
+          protocol: TCP
+        - containerPort: 9153
+          name: metrics
+          protocol: TCP
+        resources:
+          limits:
+            memory: 170Mi
+          requests:
+            cpu: 100m
+            memory: 70Mi
+
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /etc/coredns
+          name: config-volume
+          readOnly: true
+        - mountPath: /etc/zones
+          name: zones-volume
+          readOnly: true
+      volumes:
+      - name: config-volume
+        configMap:
+          name: coredns
+          defaultMode: 420
+      - name: zones-volume
+        configMap:
+          name: coredns-zones
+          defaultMode: 420

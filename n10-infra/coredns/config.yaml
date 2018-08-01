@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: n10-infra
+data:
+  Corefile: |
+    infra.n10.io {
+      file /etc/zones/infra.n10.io
+      errors
+    }
+    intra.n10.io {
+      file /etc/zones/intra.n10.io
+      errors
+    }
+    0.20.172.in-addr.arpa {
+      file /etc/zones/0.20.172.in-addr.arpa
+      errors
+    }
+    . {
+      health
+      prometheus :9153
+      reload
+    }

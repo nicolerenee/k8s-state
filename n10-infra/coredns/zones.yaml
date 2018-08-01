@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-zones
+  namespace: n10-infra
+data:
+  infra.n10.io: |
+    $ORIGIN infra.n10.io.
+    @	3600 IN	SOA ns1.intra.n10.io. dns.n10.io. (
+    				2018073101 ; serial
+    				7200       ; refresh (2 hours)
+    				3600       ; retry (1 hour)
+    				1209600    ; expire (2 weeks)
+    				3600       ; minimum (1 hour)
+    				)
+
+    	3600 IN NS ns1.intra.n10.io.
+
+    usg01       IN A    172.20.0.1
+    unifi       IN A    172.20.0.5
+    usw01       IN A    172.20.0.30
+    uswp01      IN A    172.20.0.31
+    uaphd01     IN A    172.20.0.50
+    uaphd02     IN A    172.20.0.51
+    vault       IN A    172.20.1.5
+    nuc01       IN A    172.20.1.7
+    kube01      IN A    172.20.1.16
+    kube01.oob  IN A    172.20.1.24
+
+  intra.n10.io: |
+    $ORIGIN intra.n10.io.
+    @	3600 IN	SOA ns1.intra.n10.io. dns.n10.io. (
+    				2018073101 ; serial
+    				7200       ; refresh (2 hours)
+    				3600       ; retry (1 hour)
+    				1209600    ; expire (2 weeks)
+    				3600       ; minimum (1 hour)
+    				)
+
+    	3600 IN NS ns1.intra.n10.io.
+
+    ns1         IN A    172.20.240.5
+
+  0.20.172.in-addr.arpa: |
+    $ORIGIN 0.20.172.in-addr.arpa.
+    @	3600 IN	SOA ns1.intra.n10.io. dns.n10.io. (
+    				2018073101 ; serial
+    				7200       ; refresh (2 hours)
+    				3600       ; retry (1 hour)
+    				1209600    ; expire (2 weeks)
+    				3600       ; minimum (1 hour)
+    				)
+
+    	3600 IN NS ns1.intra.n10.io.
+
+    1   IN PTR usg01.infra.n10.io.
+    5   IN PTR unifi.infra.n10.io.
+    30  IN PTR usw01.infra.n10.io.
+    31  IN PTR uswp01.infra.n10.io.
+    50  IN PTR uaphd01.infra.n10.io.
+    51  IN PTR uaphd02.infra.n10.io.

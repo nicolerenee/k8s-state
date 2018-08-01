@@ -1,0 +1,33 @@
+{
+  "protocols": {
+    "bgp": {
+      "65101": {
+        "neighbor": {
+          "172.20.1.7": {
+            "remote-as": "65102"
+          }
+        },
+        "parameters": {
+          "router-id": "172.20.1.1"
+        }
+      }
+    }
+  },
+  "service": {
+    "dns": {
+      "forwarding": {
+        "cache-size": "10000",
+        "except-interface": [
+          "pppoe2"
+        ],
+        "options": [
+          "server=/infra.n10.io/172.20.240.5",
+          "server=/intra.n10.io/172.20.240.5",
+          "server=/0.20.172.in-addr.arpa/172.20.240.5",
+          "server=/1.20.172.in-addr.arpa/172.20.240.5",
+          "server=/240.20.172.in-addr.arpa/172.20.240.5"
+        ]
+      }
+    }
+  }
+}
