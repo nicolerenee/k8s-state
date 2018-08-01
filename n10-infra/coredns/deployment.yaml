@@ -5,7 +5,7 @@ metadata:
   labels:
     app: coredns
   name: coredns
-# namespace: n10-infra
+  namespace: n10-infra
 spec:
   replicas: 2
   selector:
