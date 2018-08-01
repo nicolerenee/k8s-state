@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: sonarr
-        image: gcr.io/n10-registry/sonarr:2.0.0.5163
+        image: quay.io/nicolerenee/sonarr:2.0.0.5163
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: nzbget
-        image: gcr.io/n10-registry/nzbget:20.0-testing-r2181
+        image: quay.io/nicolerenee/nzbget:20.0-testing-r2181
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6789
