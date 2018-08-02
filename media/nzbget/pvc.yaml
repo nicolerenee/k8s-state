@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   iscsi:
     iqn: iqn.2016-01.io.n10:vault01.appdata-nzbget.cdab998267
-    targetPortal: 172.20.1.5
+    targetPortal: vault.infra.n10.io
     lun: 0
 
 ---
