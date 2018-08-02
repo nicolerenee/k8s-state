@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: flux
+  namespace: flux
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: flux
+    spec:
+      serviceAccount: flux
+      volumes:
+      - name: git-key
+        secret:
+          secretName: flux-git-deploy
+          defaultMode: 0400
+      - name: git-keygen
+        emptyDir:
+          medium: Memory
+      containers:
+      - name: flux
+        image: quay.io/weaveworks/flux:1.4.2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3030
+        volumeMounts:
+        - name: git-key
+          mountPath: /etc/fluxd/ssh
+          readOnly: true
+        - name: git-keygen
+          mountPath: /var/fluxd/keygen
+        args:
+        - --ssh-keygen-dir=/var/fluxd/keygen
+        - --k8s-secret-name=flux-git-deploy
+        - --git-url=git@github.com:nicolerenee/k8s-state
+        - --git-branch=master
+        - --connect=ws://fluxcloud
+        - --git-email=flux@n10.io
+        - --git-user=N10 Flux
+        - --sync-interval=90s
+        - --git-poll-interval=90s
+        - --memcached-hostname=memcached
+        - --memcached-service=memcached

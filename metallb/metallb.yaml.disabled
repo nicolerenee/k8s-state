@@ -1,4 +1,5 @@
 # Source: https://raw.githubusercontent.com/google/metallb/v0.7.1/manifests/metallb.yaml
+# BUG: this is breaking flux for some reason....
 
 apiVersion: v1
 kind: Namespace
