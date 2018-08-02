@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     annotations:
-      flux.weave.works/tag.fluxcloud: glob:v20.*
+      flux.weave.works/tag.fluxcloud: glob:v*
       flux.weave.works/automated: 'true'
     app: nzbget
     component: frontend
@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: nzbget
-        image: quay.io/nicolerenee/nzbget:20.0-testing-r2181
+        image: quay.io/nicolerenee/nzbget:v20.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 6789
@@ -43,6 +43,8 @@ spec:
           limits:
             cpu: "2"
             memory: 2Gi
+        securityContext:
+          runAsUser: 1024
         volumeMounts:
         - mountPath: /config
           name: data
