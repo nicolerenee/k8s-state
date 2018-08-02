@@ -1,5 +1,6 @@
 # Source: https://raw.githubusercontent.com/google/metallb/v0.7.1/manifests/metallb.yaml
-# BUG: this is breaking flux for some reason....
+# NOTE: When updating from source, change names that are namespace:name to be
+# just name otherwise it breaks flux.
 
 apiVersion: v1
 kind: Namespace
@@ -29,7 +30,8 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: metallb-system:controller
+  namespace: metallb-system
+  name: controller
   labels:
     app: metallb
 rules:
@@ -46,7 +48,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: metallb-system:speaker
+  namespace: metallb-system
+  name: speaker
   labels:
     app: metallb
 rules:
@@ -74,7 +77,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: metallb-system:controller
+  namespace: metallb-system
+  name: controller
   labels:
     app: metallb
 subjects:
@@ -89,7 +93,8 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: metallb-system:speaker
+  namespace: metallb-system
+  name: speaker
   labels:
     app: metallb
 subjects:
