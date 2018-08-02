@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -24,7 +25,7 @@ spec:
     spec:
       containers:
       - name: radarr
-        image: quay.io/nicolerenee/radarr:0.2.0.1067
+        image: quay.io/nicolerenee/radarr:v0.2.0.1120
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

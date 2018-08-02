@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -24,7 +25,7 @@ spec:
     spec:
       containers:
       - name: sonarr
-        image: quay.io/nicolerenee/sonarr:2.0.0.5163
+        image: quay.io/nicolerenee/sonarr:v2.0.0.5228
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
