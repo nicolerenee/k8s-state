@@ -29,7 +29,7 @@ spec:
           command:
             - /usr/bin/kured
           args:
-            - --slack-hook-url=https://hooks.slack.com/services/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
+            - --slack-hook-url=$(SLACK_URL)
             - --ds-namespace=n10-system
 #            - --alert-filter-regexp=^RebootRequired$
 #            - --prometheus-url=http://prometheus.monitoring.svc.cluster.local
@@ -42,6 +42,11 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
+            - name: SLACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: kured
+                  key: slack_url
           volumeMounts:
             # Needed for two purposes:
             # * Testing for the existence of /var/run/reboot-required
