@@ -52,8 +52,10 @@ spec:
           name: downloads
       volumes:
       - name: data
-        persistentVolumeClaim:
-          claimName: nzbget
+        iscsi:
+          iqn: iqn.2016-01.io.n10:vault01.appdata-nzbget.cdab998267
+          targetPortal: 172.20.1.5
+          lun: 0
       - name: downloads
         persistentVolumeClaim:
           claimName: media-nzbget

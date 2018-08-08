@@ -55,8 +55,10 @@ spec:
           name: downloads
       volumes:
       - name: data
-        persistentVolumeClaim:
-          claimName: radarr
+        iscsi:
+          iqn: iqn.2016-01.io.n10:vault01.appdata-radarr.cdab998267
+          targetPortal: 172.20.1.5
+          lun: 0
       - name: movies
         persistentVolumeClaim:
           claimName: media-movies

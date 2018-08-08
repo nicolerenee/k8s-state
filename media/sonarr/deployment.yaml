@@ -57,8 +57,10 @@ spec:
           name: downloads
       volumes:
       - name: data
-        persistentVolumeClaim:
-          claimName: sonarr
+        iscsi:
+          iqn: iqn.2016-01.io.n10:vault01.appdata-sonarr.cdab998267
+          targetPortal: 172.20.1.5
+          lun: 0
       - name: kids-tv
         persistentVolumeClaim:
           claimName: media-kids-tv
