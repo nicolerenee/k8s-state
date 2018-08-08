@@ -37,7 +37,10 @@ spec:
         - containerPort: 3031
         env:
         - name: SLACK_URL
-          value: "https://hooks.slack.com/services/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"
+          valueFrom:
+          secretKeyRef:
+            name: fluxcloud
+            key: slack_url
         - name: SLACK_CHANNEL
           value: "#kubernetes"
         - name: SLACK_USERNAME
