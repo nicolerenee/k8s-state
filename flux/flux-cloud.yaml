@@ -38,9 +38,9 @@ spec:
         env:
         - name: SLACK_URL
           valueFrom:
-          secretKeyRef:
-            name: fluxcloud
-            key: slack_url
+            secretKeyRef:
+              name: fluxcloud
+              key: slack_url
         - name: SLACK_CHANNEL
           value: "#kubernetes"
         - name: SLACK_USERNAME
