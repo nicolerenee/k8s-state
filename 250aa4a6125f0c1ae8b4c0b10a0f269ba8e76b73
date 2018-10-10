@@ -1,0 +1,1 @@
+{"jobID":"cfe54faa-6fbe-3503-d392-1997800de929","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003cnicole@nicolerenee.io\u003e"},"spec":{"n10-system:daemonset/kured":{"add":{"tag_all":"glob:master-*"},"remove":{}}}},"result":null}
