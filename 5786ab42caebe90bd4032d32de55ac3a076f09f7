@@ -1,0 +1,1 @@
+{"jobID":"21e7f00a-571c-490b-0f09-b8419c2a68c5","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003cnicole@nicolerenee.io\u003e"},"spec":{"n10-system:daemonset/kured":{"add":{"automated":"true"},"remove":{}}}},"result":null}
