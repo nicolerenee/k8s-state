@@ -10,12 +10,14 @@ kind: DaemonSet
 metadata:
   name: kured            # Must match `--ds-name`
   namespace: n10-system  # Must match `--ds-namespace`
+  annotations:
+    flux.weave.works/tag.kured: glob:master-*
 spec:
   selector:
     matchLabels:
       name: kured
   updateStrategy:
-   type: RollingUpdate
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -23,38 +25,38 @@ spec:
     spec:
       serviceAccountName: kured
       containers:
-        - name: kured
-          image: quay.io/weaveworks/kured:master-5731b98
-          imagePullPolicy: IfNotPresent
-          command:
-            - /usr/bin/kured
-          args:
-            - --slack-hook-url=$(SLACK_URL)
-            - --ds-namespace=n10-system
+      - name: kured
+        image: quay.io/weaveworks/kured:master-5731b98
+        imagePullPolicy: IfNotPresent
+        command:
+        - /usr/bin/kured
+        args:
+        - --slack-hook-url=$(SLACK_URL)
+        - --ds-namespace=n10-system
 #            - --alert-filter-regexp=^RebootRequired$
 #            - --prometheus-url=http://prometheus.monitoring.svc.cluster.local
 #
 # NO USER SERVICEABLE PARTS BEYOND THIS POINT
-          env:
+        env:
             # Pass in the name of the node on which this pod is scheduled
             # for use with drain/uncordon operations and lock acquisition
-            - name: KURED_NODE_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: spec.nodeName
-            - name: SLACK_URL
-              valueFrom:
-                secretKeyRef:
-                  name: kured
-                  key: slack_url
-          volumeMounts:
+        - name: KURED_NODE_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: SLACK_URL
+          valueFrom:
+            secretKeyRef:
+              name: kured
+              key: slack_url
+        volumeMounts:
             # Needed for two purposes:
             # * Testing for the existence of /var/run/reboot-required
             # * Accessing /var/run/dbus/system_bus_socket to effect reboot
-            - name: hostrun
-              mountPath: /var/run
+        - name: hostrun
+          mountPath: /var/run
       restartPolicy: Always
       volumes:
-        - name: hostrun
-          hostPath:
-            path: /var/run
+      - name: hostrun
+        hostPath:
+          path: /var/run
