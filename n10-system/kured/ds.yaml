@@ -12,6 +12,7 @@ metadata:
   namespace: n10-system  # Must match `--ds-namespace`
   annotations:
     flux.weave.works/tag.kured: glob:master-*
+    flux.weave.works/automated: 'true'
 spec:
   selector:
     matchLabels:
