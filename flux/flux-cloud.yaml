@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: fluxcloud
-        image: justinbarrick/fluxcloud:master-4e11ba7
+        image: justinbarrick/fluxcloud:master-265bd9d
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3031
