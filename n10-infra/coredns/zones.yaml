@@ -23,7 +23,7 @@ data:
     uaphd01     IN A    172.20.0.50
     uaphd02     IN A    172.20.0.51
     vault       IN A    172.20.1.5
-    nuc01       IN A    172.20.1.7
+    nuc01       IN A    172.20.1.20
     kube01      IN A    172.20.1.16
     kube01.oob  IN A    172.20.1.24
 
