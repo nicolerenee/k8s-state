@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vault01-w20-media
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /volume1/media/Media/
+    server: 172.20.1.5
+    readOnly: false
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media
+  namespace: warehouse20
+spec:
+  volumeName: vault01-w20-media
+  accessModes:
+  - ReadWriteMany
+  resources:
+     requests:
+       storage: 1Ti

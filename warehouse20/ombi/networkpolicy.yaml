@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ombi
+  namespace: warehouse20
+spec:
+  podSelector:
+    matchLabels:
+      app: ombi
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: monitorr
+    - podSelector:
+        matchLabels:
+          app: organizr
+    - podSelector:
+        matchLabels:
+          app: varken
+    - namespaceSelector:
+        matchLabels:
+          purpose: nginx-ingress-prod
+    ports:
+    - protocol: TCP
+      port: http

@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex
+  namespace: warehouse20
+  labels:
+    app: plex
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: http
+      targetPort: http
+      port: 32400
+      protocol: TCP
+  selector:
+    app: plex
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: plex
+  namespace: warehouse20
+  labels:
+    app: plex
+spec:
+  serviceName: plex
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: plex
+          image: plexinc/pms-docker:public
+          imagePullPolicy: Always
+          env:
+          - name: ADVERTISE_IP
+            value: "https://plex.warehouse20.com/,https://plex-0.plex:32400,https://172.20.240.10:32400/,https://127.0.0.1:32400/"
+          - name: PLEX_UID
+            value: "943"
+          - name: PLEX_GID
+            value: "943"
+          - name: TZ
+            value: "America/Denver"
+          livenessProbe:
+            httpGet:
+              path: /identity
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /identity
+              port: http
+          ports:
+            - containerPort: 32400
+              name: http
+          resources:
+            requests:
+              cpu: 1000m
+              gpu.intel.com/i915: 1
+              memory: "1Gi"
+            limits:
+              cpu: 4000m
+              gpu.intel.com/i915: 1
+              memory: "4Gi"
+          volumeMounts:
+          - mountPath: /config
+            name: config
+            subPath: config
+          - mountPath: /transcode
+            name: tmp-storage
+          - mountPath: /tmp
+            name: tmp-storage
+          - mountPath: /data/
+            name: media
+          - mountPath: /mnt/media01/
+            name: media
+      volumes:
+        - name: config
+          iscsi:
+            iqn: iqn.2019-03.tech.freckle.bou-nas01:k8s-warehouse20-plex
+            targetPortal: 172.20.1.10
+            lun: 0
+        - name: tmp-storage
+          emptyDir: {}
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

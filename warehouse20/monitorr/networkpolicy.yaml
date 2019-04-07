@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: monitorr
+  namespace: warehouse20
+spec:
+  podSelector:
+    matchLabels:
+      app: monitorr
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          purpose: nginx-ingress-public
+    ports:
+    - protocol: TCP
+      port: http
