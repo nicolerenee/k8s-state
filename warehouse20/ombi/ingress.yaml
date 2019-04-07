@@ -22,5 +22,5 @@ spec:
         path: /
   tls:
   - hosts:
-    - ombi.warehouse20.com
+    - "*.warehouse20.com"
     secretName: cf-w20
