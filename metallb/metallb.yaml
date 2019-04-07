@@ -1,4 +1,4 @@
-# Source: https://raw.githubusercontent.com/google/metallb/v0.7.1/manifests/metallb.yaml
+# Source: https://raw.githubusercontent.com/google/metallb/v0.7.3/manifests/metallb.yaml
 # NOTE: When updating from source, change names that are namespace:name to be
 # just name otherwise it breaks flux.
 
@@ -150,7 +150,7 @@ spec:
       hostNetwork: true
       containers:
       - name: speaker
-        image: metallb/speaker:v0.7.1
+        image: metallb/speaker:v0.7.3
         imagePullPolicy: IfNotPresent
         args:
         - --port=7472
@@ -208,7 +208,7 @@ spec:
         runAsUser: 65534 # nobody
       containers:
       - name: controller
-        image: metallb/controller:v0.7.1
+        image: metallb/controller:v0.7.3
         imagePullPolicy: IfNotPresent
         args:
         - --port=7472

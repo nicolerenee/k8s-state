@@ -7,14 +7,23 @@ data:
   config: |
     peers:
     - peer-address: 172.20.1.1
-      peer-asn: 65101
-      my-asn: 65102
+      peer-asn: 64512
+      my-asn: 64512
     address-pools:
     - name: internal
       protocol: bgp
+      avoid-buggy-ips: true
       addresses:
       - 172.20.240.0/22
+    # Some Layer 2 addresses for when BGP fails. For services that need to
+    # ALWAYS work like DNS.
+    - name: internal-l2
+      auto-assign: false
+      protocol: layer2
+      addresses:
+      - 172.20.1.100-172.20.1.150
     - name: public
+      auto-assign: false
       protocol: bgp
       addresses:
       - 65.101.241.105/32
