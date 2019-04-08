@@ -44,18 +44,27 @@ spec:
           imagePullPolicy: Always
           env:
           - name: ADVERTISE_IP
-            value: "https://plex.warehouse20.com/,https://plex-0.plex:32400,https://172.20.240.10:32400/,https://127.0.0.1:32400/"
+            value: "https://plex.warehouse20.com/,https://172.20.240.10:32400/"
           - name: PLEX_UID
             value: "943"
           - name: PLEX_GID
             value: "943"
           - name: TZ
             value: "America/Denver"
+          lifecycle:
+            postStart:
+              exec:
+                # Plex Relay can mask when there are problems, so let's remove it
+                # Since plex isn't actually already installed, we have to sleep for the
+                # init script to do it's job of installing plex
+                command: ["/bin/sh", "-c", "sleep 15 && rm -rf /usr/lib/plexmediaserver/Plex\\ Relay"]
           livenessProbe:
+            initialDelaySeconds: 20
             httpGet:
               path: /identity
               port: http
           readinessProbe:
+            initialDelaySeconds: 20
             httpGet:
               path: /identity
               port: http
