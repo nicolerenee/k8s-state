@@ -34,15 +34,15 @@ spec:
       persistence:
         enabled: false
         size: 5Gi
-        storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes:
-            - "ReadWriteOnce"
-          resources:
-            requests:
-              storage: 5Gi
-              storageClassName: rook-ceph-block
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 5Gi
+                storageClassName: rook-ceph-block
     exporters:
       kube-state-metrics:
         enabled: false
