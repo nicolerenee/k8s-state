@@ -1,0 +1,1 @@
+{"jobID":"efb74b68-6ffb-3c4d-158b-74cd34d20f49","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:statefulset/plex-gooery":{"add":{"tag.plex":"glob:1.*"},"remove":{}}}},"result":null}
