@@ -15,4 +15,4 @@ spec:
   values:
     prometheus:
       servicemonitor:
-        enabled: true
+        enabled: false
