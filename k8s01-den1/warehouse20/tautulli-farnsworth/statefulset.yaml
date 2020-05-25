@@ -11,14 +11,13 @@ spec:
   type: ClusterIP
   clusterIP: None
   ports:
-    - name: http
-      targetPort: http
-      port: 8181
-      protocol: TCP
+  - name: http
+    targetPort: http
+    port: 8181
+    protocol: TCP
   selector:
     app: tautulli
     instance: farnsworth
-
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -28,6 +27,9 @@ metadata:
   labels:
     app: tautulli
     instance: farnsworth
+  annotations:
+    fluxcd.io/automated: 'true'
+    fluxcd.io/tag.tautulli: glob:v2.*
 spec:
   serviceName: tautulli-farnsworth
   updateStrategy:
@@ -44,40 +46,40 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: tautulli
-          image: "tautulli/tautulli:v2.2.4"
-          imagePullPolicy: IfNotPresent
-          env:
-          - name: PUID
-            value: "950"
-          - name: PGID
-            value: "950"
-          - name: TZ
-            value: "America/Chicago"
-          ports:
-            - containerPort: 8181
-              name: http
-          resources:
-            requests:
-              cpu: 200m
-              memory: "512Mi"
-            limits:
-              cpu: 2000m
-              memory: "2048Mi"
-          volumeMounts:
-            - mountPath: /config
-              name: config
-              subPath: data
-          livenessProbe:
-            httpGet:
-              path: /status
-              port: http
-            initialDelaySeconds: 300
-          readinessProbe:
-            httpGet:
-              path: /status
-              port: http
-            initialDelaySeconds: 60
+      - name: tautulli
+        image: "tautulli/tautulli:v2.2.4"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PUID
+          value: "950"
+        - name: PGID
+          value: "950"
+        - name: TZ
+          value: "America/Chicago"
+        ports:
+        - containerPort: 8181
+          name: http
+        resources:
+          requests:
+            cpu: 200m
+            memory: "512Mi"
+          limits:
+            cpu: 2000m
+            memory: "2048Mi"
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: data
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: http
+          initialDelaySeconds: 300
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: http
+          initialDelaySeconds: 60
       volumes:
       - name: config
         persistentVolumeClaim:
