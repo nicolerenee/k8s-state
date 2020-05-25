@@ -1,0 +1,1 @@
+{"jobID":"2ef644ba-c806-eacc-57c7-8e8e27860e4c","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:statefulset/tautulli-farnsworth":{"add":{"automated":"true","tag.tautulli":"glob:v2.*"},"remove":{}}}},"result":null}
