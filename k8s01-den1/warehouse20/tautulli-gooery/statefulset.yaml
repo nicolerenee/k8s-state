@@ -11,14 +11,13 @@ spec:
   type: ClusterIP
   clusterIP: None
   ports:
-    - name: http
-      targetPort: http
-      port: 80
-      protocol: TCP
+  - name: http
+    targetPort: http
+    port: 80
+    protocol: TCP
   selector:
     app: tautulli
     instance: gooery
-
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -28,6 +27,9 @@ metadata:
   labels:
     app: tautulli
     instance: gooery
+  annotations:
+    fluxcd.io/automated: 'true'
+    fluxcd.io/tag.tautulli: glob:v2.*
 spec:
   serviceName: tautulli-gooery
   updateStrategy:
@@ -44,36 +46,36 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: tautulli
-          image: "tautulli/tautulli:v2.2.4"
-          imagePullPolicy: IfNotPresent
-          env:
-          - name: TZ
-            value: "Etc/UTC"
-          ports:
-            - containerPort: 8181
-              name: http
-          resources:
-            requests:
-              cpu: 200m
-              memory: "512Mi"
-            limits:
-              cpu: 2000m
-              memory: "2048Mi"
-          volumeMounts:
-            - mountPath: /config
-              name: config
-              subPath: data
-          livenessProbe:
-            httpGet:
-              path: /status
-              port: http
-            initialDelaySeconds: 90
-          readinessProbe:
-            httpGet:
-              path: /status
-              port: http
-            initialDelaySeconds: 30
+      - name: tautulli
+        image: "tautulli/tautulli:v2.2.4"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TZ
+          value: "Etc/UTC"
+        ports:
+        - containerPort: 8181
+          name: http
+        resources:
+          requests:
+            cpu: 200m
+            memory: "512Mi"
+          limits:
+            cpu: 2000m
+            memory: "2048Mi"
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: data
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: http
+          initialDelaySeconds: 90
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: http
+          initialDelaySeconds: 30
       securityContext:
         runAsNonRoot: true
         runAsUser: 1100
