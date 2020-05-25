@@ -14,6 +14,9 @@ spec:
     name: metallb
     version: 0.1.12
   values:
+    prometheus:
+      ServiceMonitor:
+        enabled: true
     configInline:
       peers:
         # core01a

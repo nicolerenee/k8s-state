@@ -21,6 +21,8 @@ spec:
       enabled: true
     metrics:
       enabled: true
+      serviceMonitor:
+        enabled: true
     service:
       type: LoadBalancer
       externalTrafficPolicy: Local
