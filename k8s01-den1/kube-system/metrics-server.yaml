@@ -21,3 +21,4 @@ spec:
       kubelet-preferred-address-types: InternalIP
     serviceMonitor:
       enabled: true
+      namespace: kube-system
