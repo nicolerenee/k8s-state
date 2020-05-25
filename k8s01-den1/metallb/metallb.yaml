@@ -15,7 +15,7 @@ spec:
     version: 0.1.12
   values:
     prometheus:
-      ServiceMonitor:
+      serviceMonitor:
         enabled: true
     configInline:
       peers:
