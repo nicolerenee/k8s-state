@@ -1,0 +1,1 @@
+{"jobID":"f63bb555-80d3-408a-536b-4fb5f6cd1331","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:statefulset/tautulli-gooery":{"add":{"automated":"true","tag.tautulli":"glob:v2.*"},"remove":{}}}},"result":null}
