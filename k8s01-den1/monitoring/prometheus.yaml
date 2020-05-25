@@ -43,6 +43,3 @@ spec:
               requests:
                 storage: 5Gi
                 storageClassName: rook-ceph-block
-    exporters:
-      kube-state-metrics:
-        enabled: false
