@@ -30,9 +30,19 @@ spec:
     alertmanager:
       logLevel: error
       replicaCount: 2
+      # Due to a bug we disable the easy way and manually define our storage
       persistence:
-        enabled: true
+        enabled: false
         size: 5Gi
+        storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - "ReadWriteOnce"
+          resources:
+            requests:
+              storage: 5Gi
+              storageClassName: rook-ceph-block
     exporters:
       kube-state-metrics:
         enabled: false
