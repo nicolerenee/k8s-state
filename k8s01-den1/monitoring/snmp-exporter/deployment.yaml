@@ -1,0 +1,43 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: snmp-exporter
+  name: snmp-exporter
+  namespace: monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: snmp-exporter
+  template:
+    metadata:
+      labels:
+        app: snmp-exporter
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - name: snmp-exporter
+        image: prom/snmp-exporter:v0.15.0
+        ports:
+        - name: http
+          containerPort: 9116
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - mountPath: /etc/snmp_exporter/
+          readOnly: true
+          name: config
+      volumes:
+      - name: config
+        configMap:
+          name: snmp-exporter-config
+          defaultMode: 420
