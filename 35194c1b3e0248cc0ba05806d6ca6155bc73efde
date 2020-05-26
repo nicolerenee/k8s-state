@@ -1,0 +1,1 @@
+{"jobID":"ec31260c-6024-f0ac-f794-2c78ca550069","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"kube-system:deployment/sealed-secrets-controller":{"add":{"tag_all":"glob:v0.*"},"remove":{}}}},"result":null}
