@@ -47,7 +47,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: tautulli
-        image: "tautulli/tautulli:v2.5.0-beta"
+        image: "tautulli/tautulli:v2.2.3"
         imagePullPolicy: IfNotPresent
         env:
         - name: TZ
