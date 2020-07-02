@@ -1,4 +1,4 @@
-apiVersion: projectcalico.org/v3
+apiVersion: crd.projectcalico.org/v1
 kind: BGPPeer
 metadata:
   name: core01a
@@ -7,7 +7,7 @@ spec:
   peerIP: 172.26.3.2
   asNumber: 64567
 ---
-apiVersion: projectcalico.org/v3
+apiVersion: crd.projectcalico.org/v1
 kind: BGPPeer
 metadata:
   name: core01b
