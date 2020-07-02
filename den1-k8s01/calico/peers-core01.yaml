@@ -2,6 +2,7 @@ apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
   name: core01a
+  namespace: kube-system
 spec:
   peerIP: 172.26.3.2
   asNumber: 64567
@@ -10,6 +11,7 @@ apiVersion: projectcalico.org/v3
 kind: BGPPeer
 metadata:
   name: core01b
+  namespace: kube-system
 spec:
   peerIP: 172.26.3.3
   asNumber: 64567
