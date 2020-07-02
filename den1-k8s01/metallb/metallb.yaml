@@ -22,18 +22,14 @@ spec:
       # bgp-communities:
       #   calico-nomesh: "65001:100"
       peers:
-        # edge01
-        - peer-address: 172.25.0.2
-          peer-asn: 64900
-          my-asn: 65002
-        # # core01a
-        # - peer-address: 172.26.3.2
-        #   peer-asn: 64567
-        #   my-asn: 65001
-        # # core01b
-        # - peer-address: 172.26.3.3
-        #   peer-asn: 64567
-        #   my-asn: 65001
+        # core01a
+        - peer-address: 172.26.3.2
+          peer-asn: 64567
+          my-asn: 65001
+        # core01b
+        - peer-address: 172.26.3.3
+          peer-asn: 64567
+          my-asn: 65001
       address-pools:
       - name: public
         protocol: bgp
