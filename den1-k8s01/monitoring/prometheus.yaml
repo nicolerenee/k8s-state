@@ -1,0 +1,43 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: semver:~4.0
+spec:
+  releaseName: prometheus
+  chart:
+    repository: https://charts.bitnami.com/bitnami
+    name: prometheus-operator
+    version: 0.17.1
+  values:
+    global:
+      storageClass: rook-ceph-block
+    operator:
+      logLevel: error
+    prometheus:
+      logLevel: error
+      replicaCount: 0
+      retention: 90d
+      persistence:
+        enabled: true
+        size: 50Gi
+    alertmanager:
+      logLevel: error
+      replicaCount: 0
+      # Due to a bug we disable the easy way and manually define our storage
+      persistence:
+        enabled: false
+        size: 5Gi
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 5Gi
+                storageClassName: rook-ceph-block
