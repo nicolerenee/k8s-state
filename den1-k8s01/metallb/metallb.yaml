@@ -25,7 +25,7 @@ spec:
         # edge01
         - peer-address: 172.25.0.2
           peer-asn: 64900
-          my-asn: 65001
+          my-asn: 65002
         # # core01a
         # - peer-address: 172.26.3.2
         #   peer-asn: 64567
