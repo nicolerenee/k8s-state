@@ -8,8 +8,9 @@ metadata:
   name: sonarr
   namespace: warehouse20
   annotations:
-    fluxcd.io/automated: "true"
-    fluxcd.io/tag.sonarr-exporter: semver:~v0.1
+    fluxcd.io/automated: "false"
+    # figure out how to disable updates on sonarr or find a new
+    fluxcd.io/tag.exporter: semver:~v0.1
 spec:
   selector:
     matchLabels:
@@ -28,7 +29,7 @@ spec:
       containers:
       - name: sonarr
         # Preview tag is for the latest v3
-        image: linuxserver/sonarr:arm32v7-2.0.0.5344-ls69
+        image: linuxserver/sonarr:latest
         imagePullPolicy: Always
         env:
         - name: PUID
