@@ -10,14 +10,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: radarr
+      app.kubernetes.io/name: radarr
+      app.kubernetes.io/instance: radarr
   revisionHistoryLimit: 3
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: radarr
         app.kubernetes.io/name: radarr
         app.kubernetes.io/instance: radarr
     spec:
