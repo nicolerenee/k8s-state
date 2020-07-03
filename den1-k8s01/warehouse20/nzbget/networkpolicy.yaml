@@ -16,7 +16,7 @@ spec:
           app: organizr
     - podSelector:
         matchLabels:
-          app: sonarr
+          app.kubernetes.io/name: sonarr
     - podSelector:
         matchLabels:
           app: radarr
