@@ -72,9 +72,9 @@ spec:
         args: ["sonarr"]
         env:
         - name: PORT
-          value: "8989"
+          value: "9707"
         - name: URL
-          value: localhost
+          value: http://localhost:8989
         - name: APIKEY
           valueFrom:
             secretKeyRef:
