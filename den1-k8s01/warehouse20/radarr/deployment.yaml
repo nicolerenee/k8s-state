@@ -3,7 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
   name: radarr
   namespace: warehouse20
 spec:
@@ -17,6 +18,8 @@ spec:
     metadata:
       labels:
         app: radarr
+        app.kubernetes.io/name: radarr
+        app.kubernetes.io/instance: radarr
     spec:
       automountServiceAccountToken: false
       containers:
@@ -59,6 +62,42 @@ spec:
           subPath: config
         - mountPath: /mnt/media/store01
           name: media
+      - name: exportarr
+        image: onedr0p/exportarr:v0.3.3
+        command: ["exportarr"]
+        args: ["radarr"]
+        env:
+        - name: PORT
+          value: "9707"
+        - name: URL
+          value: http://localhost:7878
+        - name: APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: apikeys
+              key: radarr
+        ports:
+        - name: monitoring
+          containerPort: 9707
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: monitoring
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: monitoring
+          failureThreshold: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 256Mi
       volumes:
       - name: config
         persistentVolumeClaim:

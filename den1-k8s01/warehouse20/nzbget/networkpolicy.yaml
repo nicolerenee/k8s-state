@@ -19,7 +19,8 @@ spec:
           app.kubernetes.io/name: sonarr
     - podSelector:
         matchLabels:
-          app: radarr
+          app.kubernetes.io/name: radarr
+          app.kubernetes.io/instance: radarr
     - namespaceSelector:
         matchLabels:
           app: ingress-public

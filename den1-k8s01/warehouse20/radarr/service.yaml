@@ -5,7 +5,8 @@ metadata:
   name: radarr
   namespace: warehouse20
   labels:
-    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
 spec:
   type: ClusterIP
   ports:
@@ -13,5 +14,9 @@ spec:
       targetPort: http
       port: 7878
       protocol: TCP
+    - name: monitoring
+      targetPort: monitoring
+      port: 9707
   selector:
-    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr

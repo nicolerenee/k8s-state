@@ -5,7 +5,8 @@ metadata:
   name: radarr-data
   namespace: warehouse20
   labels:
-    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
 spec:
   accessModes:
   - ReadWriteOnce

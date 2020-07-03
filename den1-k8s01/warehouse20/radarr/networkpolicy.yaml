@@ -6,7 +6,8 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: radarr
+      app.kubernetes.io/name: radarr
+      app.kubernetes.io/instance: radarr
   policyTypes:
   - Ingress
   ingress:

@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: sonarr
   name: sonarr
   namespace: warehouse20
-  annotations:
+  annotations: {}
     # figure out how to disable updates on sonarr or find a new
     # fluxcd.io/tag.exporter: semver:~v0.1
 spec:
