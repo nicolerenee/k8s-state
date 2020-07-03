@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: sonarr
+  namespace: warehouse20
+spec:
+  selector:
+    matchLabels:
+      app: sonarr
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: sonarr
+        # Preview tag is for the latest v3
+        image: linuxserver/sonarr:preview
+        imagePullPolicy: Always
+        env:
+        - name: PUID
+          value: "943"
+        - name: PGID
+          value: "943"
+        - name: TZ
+          value: "America/Chicago"
+        ports:
+        - name: http
+          containerPort: 8989
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 2000m
+            memory: 2Gi
+        # securityContext:
+        #   runAsUser: 1024
+        #   runAsGroup: 100
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: config
+        - mountPath: /mnt/media/store01
+          name: media
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+            claimName: sonarr-data
+      - name: media
+        persistentVolumeClaim:
+          claimName: media-store01

@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tautulli-gooery
+  namespace: warehouse20
+  labels:
+    app: tautulli
+    instance: gooery
+  annotations:
+    fluxcd.io/automated: 'true'
+    fluxcd.io/tag.tautulli: glob:v2.*
+spec:
+  revisionHistoryLimit: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: tautulli
+      instance: gooery
+  template:
+    metadata:
+      labels:
+        app: tautulli
+        instance: gooery
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: tautulli
+        image: "tautulli/tautulli:v2.5.0-beta"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: TZ
+          value: "Etc/UTC"
+        ports:
+        - containerPort: 8181
+          name: http
+        resources:
+          requests:
+            cpu: 200m
+            memory: "512Mi"
+          limits:
+            cpu: 2000m
+            memory: "2048Mi"
+        volumeMounts:
+        - mountPath: /config
+          name: config
+          subPath: data
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: http
+          initialDelaySeconds: 60
+          failureThreshold: 5
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: http
+          initialDelaySeconds: 60
+          failureThreshold: 5
+          timeoutSeconds: 10
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1100
+        runAsGroup: 1100
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: tautulli-gooery-data
