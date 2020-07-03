@@ -67,7 +67,7 @@ spec:
         - mountPath: /mnt/media/store01
           name: media
       - name: exportarr
-        image: onedr0p/exportarr:v0.3.1
+        image: onedr0p/exportarr:v0.3.3
         command: ["exportarr"]
         args: ["sonarr"]
         env:
