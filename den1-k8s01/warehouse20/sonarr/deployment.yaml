@@ -28,7 +28,7 @@ spec:
       containers:
       - name: sonarr
         # Preview tag is for the latest v3
-        image: linuxserver/sonarr:latest
+        image: linuxserver/sonarr:preview
         imagePullPolicy: Always
         env:
         - name: PUID
