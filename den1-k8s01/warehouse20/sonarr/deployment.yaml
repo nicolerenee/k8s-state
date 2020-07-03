@@ -28,7 +28,7 @@ spec:
       containers:
       - name: sonarr
         # Preview tag is for the latest v3
-        image: linuxserver/sonarr:preview
+        image: linuxserver/sonarr:arm32v7-2.0.0.5344-ls69
         imagePullPolicy: Always
         env:
         - name: PUID
@@ -107,7 +107,7 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-            claimName: sonarr-data
+          claimName: sonarr-data
       - name: media
         persistentVolumeClaim:
           claimName: media-store01
