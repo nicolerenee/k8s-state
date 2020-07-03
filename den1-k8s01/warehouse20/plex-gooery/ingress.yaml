@@ -1,0 +1,26 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/enable-access-log: "false"
+  labels:
+    app: plex
+    instance: gooery
+  name: plex-gooery
+  namespace: warehouse20
+spec:
+  rules:
+  - host: gooery.warehouse20.com
+    http:
+      paths:
+      - backend:
+          serviceName: plex-gooery
+          servicePort: 32400
+        path: /
+  tls:
+  - hosts:
+    - "gooery.warehouse20.com"
+    secretName: gooery-tls
