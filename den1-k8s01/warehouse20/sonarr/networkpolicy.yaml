@@ -20,6 +20,10 @@ spec:
           app: organizr
     - podSelector:
         matchLabels:
+          app.kubernetes.io/name: traktarr
+          app.kubernetes.io/instance: traktarr
+    - podSelector:
+        matchLabels:
           app: varken
     - namespaceSelector:
         matchLabels:
