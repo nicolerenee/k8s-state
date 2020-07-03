@@ -37,15 +37,15 @@ spec:
         - name: http
           containerPort: 7878
           protocol: TCP
-        # livenessProbe:
-        #   httpGet:
-        #     path: /
-        #     port: http
-        # readinessProbe:
-        #   failureThreshold: 3
-        #   httpGet:
-        #     path: /
-        #     port: http
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
         resources:
           requests:
             cpu: 500m
