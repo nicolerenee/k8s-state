@@ -7,7 +7,8 @@ metadata:
     nginx.ingress.kubernetes.io/auth-url: "http://organizr.warehouse20.svc.cluster.local/api/?v1/auth&group=1"
     nginx.ingress.kubernetes.io/auth-signin: "https://warehouse20.com/?error=401"
   labels:
-    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
   name: sonarr
   namespace: warehouse20
 spec:

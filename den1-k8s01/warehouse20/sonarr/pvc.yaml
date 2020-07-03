@@ -5,7 +5,8 @@ metadata:
   name: sonarr-data
   namespace: warehouse20
   labels:
-    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
 spec:
   accessModes:
   - ReadWriteOnce

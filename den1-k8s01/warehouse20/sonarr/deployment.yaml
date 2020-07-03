@@ -3,20 +3,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
   name: sonarr
   namespace: warehouse20
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.sonarr-exporter: semver:~v0.1
 spec:
   selector:
     matchLabels:
-      app: sonarr
+      app.kubernetes.io/name: sonarr
+      app.kubernetes.io/instance: sonarr
   revisionHistoryLimit: 3
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: sonarr
+        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/instance: sonarr
     spec:
       automountServiceAccountToken: false
       containers:
@@ -60,6 +66,44 @@ spec:
           subPath: config
         - mountPath: /mnt/media/store01
           name: media
+      - name: exportarr
+          image: onedr0p/exportarr:v0.3.1
+          command: ["exportarr"]
+          args: ["sonarr"]
+          env:
+          - name: PORT
+            value: 8989
+          - name: URL
+            value: localhost
+          - name: APIKEY
+            valueFrom:
+            secretKeyRef:
+              name: apikeys
+              key: sonarr
+          - name: ENABLE_EPISODE_QUALITY_METRICS
+            value: "true"
+          ports:
+          - name: monitoring
+            containerPort: 9707
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
       volumes:
       - name: config
         persistentVolumeClaim:

@@ -6,11 +6,17 @@ metadata:
   namespace: warehouse20
   labels:
     app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
 spec:
   ports:
     - name: http
       targetPort: http
       port: 8989
       protocol: TCP
+    - name: monitoring
+      targetPort: monitoring
+      port: 9707
   selector:
-    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
