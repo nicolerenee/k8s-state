@@ -1,9 +1,0 @@
-# ---
-# apiVersion: crd.projectcalico.org/v1
-# kind: BGPPeer
-# metadata:
-#   name: bgppeer-metallb
-#   namespace: metallb
-# spec:
-#   asNumber: 65002
-#   peerIP: 127.0.0.1

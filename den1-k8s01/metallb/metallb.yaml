@@ -19,23 +19,23 @@ spec:
       serviceMonitor:
         enabled: true
     configInline:
-      # bgp-communities:
-      #   calico-nomesh: "65001:100"
       peers:
         # core01a
         - peer-address: 172.26.3.2
           peer-asn: 64567
-          my-asn: 65001
+          my-asn: 64590
         # core01b
         - peer-address: 172.26.3.3
           peer-asn: 64567
-          my-asn: 65001
+          my-asn: 64590
       address-pools:
+      - name: internal
+        protocol: bgp
+        auto-assign: true
+        addresses:
+        - 172.26.10.0/24
       - name: public
         protocol: bgp
         auto-assign: false
         addresses:
         - 72.18.145.240/28
-        # bgp-advertisements:
-        # - communities:
-        #   - calico-nomesh
