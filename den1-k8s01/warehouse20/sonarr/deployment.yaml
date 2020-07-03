@@ -77,9 +77,9 @@ spec:
           value: localhost
         - name: APIKEY
           valueFrom:
-          secretKeyRef:
-            name: apikeys
-            key: sonarr
+            secretKeyRef:
+              name: apikeys
+              key: sonarr
         - name: ENABLE_EPISODE_QUALITY_METRICS
           value: "true"
         ports:
