@@ -24,7 +24,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: radarr
-        image: linuxserver/radarr:latest
+        image: hotio/radarr:aphrodite-3.0.0.3112
         imagePullPolicy: Always
         env:
         - name: PUID
