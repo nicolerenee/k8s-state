@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage01-den
+  namespace: monitoring
+  labels:
+    node: storage01-den
+    app: external-metrics
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: node-exporter
+    protocol: TCP
+    port: 9100
+    targetPort: 9100
+  - name: zfs-exporter
+    protocol: TCP
+    port: 9134
+    targetPort: 9134  
+
+---
+
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: storage01-den
+subsets:
+  - addresses:
+      - ip: 172.25.2.4
+    ports:
+      - port: 9100
+        name: node-exporter
+      - port: 9134
+        name: zfs-exporter
+
+---
+
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: storage01-den
+  namespace: monitoring
+  labels:
+    node: storage01-den
+spec:
+  selector:
+    matchLabels:
+      node: storage01-den
+  endpoints:
+  - port: node-exporter
+  - port: zfs-exporter
