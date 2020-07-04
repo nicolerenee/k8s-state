@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: radarr
-  namespace: monitoring
+  namespace: warehouse20
   labels:
     app.kubernetes.io/name: radarr
     app.kubernetes.io/instance: radarr

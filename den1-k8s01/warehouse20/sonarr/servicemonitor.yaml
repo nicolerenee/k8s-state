@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: sonarr
-  namespace: monitoring
+  namespace: warehouse20
   labels:
     app.kubernetes.io/name: sonarr
     app.kubernetes.io/instance: sonarr
