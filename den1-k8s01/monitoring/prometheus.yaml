@@ -37,7 +37,8 @@ spec:
           kubernetes.io/ingress.class: nginx
           cert-manager.io/cluster-issuer: "letsencrypt-prod"
         hosts:
-        - alerts.den1.freckle.tech
+        - name: alerts.den1.freckle.tech
+          path: /
         tls:
         - hosts:
           - alerts.den1.freckle.tech
