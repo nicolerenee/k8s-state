@@ -8,7 +8,7 @@ metadata:
     fluxcd.io/automated: "false"
     fluxcd.io/tag.chart-image: semver:~4.0
 spec:
-  releaseName: prom
+  releaseName: prometheus-operator
   chart:
     repository: https://charts.bitnami.com/bitnami
     name: prometheus-operator
