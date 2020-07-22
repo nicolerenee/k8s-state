@@ -22,7 +22,7 @@ spec:
     updateStrategy: RollingUpdate
     configuration:
       prometheusUrl: http://prometheus-operator-prometheus.monitoring.svc.cluster.local:9090
-      alertFilterRegexp: ^RebootRequired$
+      alertFilterRegexp: ^(RebootRequired)$
       slackUsername: "kured - den1-k8s01"
     metrics:
       create: true
