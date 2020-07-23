@@ -30,7 +30,7 @@ spec:
         image: plexinc/pms-docker:1.19.5.3112-b23ab3896
         env:
         - name: ADVERTISE_IP
-          value: "https://gooery.warehouse20.com/"
+          value: "https://gooery.warehouse20.com/,http://plex-gooery:32400/"
         - name: PLEX_UID
           value: "943"
         - name: PLEX_GID
