@@ -22,7 +22,10 @@ spec:
     updateStrategy: RollingUpdate
     configuration:
       prometheusUrl: http://prometheus-operator-prometheus.monitoring.svc.cluster.local:9090
-      alertFilterRegexp: ^(RebootRequired)$
+      # alertFilterRegexp: ^(RebootRequired)$
       slackUsername: "kured - den1-k8s01"
+    extraArgs:
+      # Define as an extra arg because in config it's getting quotes, which seems to break things
+      alert-filter-regexp: ^(RebootRequired)$
     metrics:
       create: true
