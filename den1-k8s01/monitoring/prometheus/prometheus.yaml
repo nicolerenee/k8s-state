@@ -19,7 +19,10 @@ spec:
     operator:
       logLevel: error
     prometheus:
-      additionalScrapeConfigsExternal: true
+      additionalScrapeConfigsExternal:
+        enabled: true
+        name: prometheus-operator-prometheus-scrape-config
+        key: additional-scrape-configs.yaml
       logLevel: error
       replicaCount: 1
       retention: 90d
@@ -44,3 +47,11 @@ spec:
         - hosts:
           - alerts.den1.freckle.tech
           secretName: alertmanager-tls
+      config:
+        receivers:
+          - name: slack
+            slack_configs:
+            - channel: '#alerts'
+              send_resolved: true
+              title: '{{ template "custom_title" . }}'
+              text: '{{ template "custom_slack_message" . }}'
