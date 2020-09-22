@@ -11,8 +11,8 @@ spec:
   releaseName: prometheus-operator
   chart:
     repository: https://charts.bitnami.com/bitnami
-    name: prometheus-operator
-    version: 0.22.3
+    name: kube-prometheus
+    version: 0.42.1
   values:
     global:
       storageClass: rook-ceph-block
