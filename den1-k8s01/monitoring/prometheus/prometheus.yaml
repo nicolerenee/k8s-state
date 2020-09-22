@@ -28,7 +28,7 @@ spec:
       retention: 90d
       persistence:
         enabled: true
-        size: 50Gi
+        size: 100Gi
     alertmanager:
       logLevel: error
       replicaCount: 2
