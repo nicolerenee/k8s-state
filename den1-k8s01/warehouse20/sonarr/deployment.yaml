@@ -11,6 +11,7 @@ metadata:
     fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
     # figure out how to disable updates on sonarr or find a new
     # fluxcd.io/tag.exporter: semver:~v0.1
+    fluxcd.io/automated: 'true'
 spec:
   selector:
     matchLabels:
