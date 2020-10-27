@@ -7,6 +7,8 @@ metadata:
     app.kubernetes.io/instance: radarr
   name: radarr
   namespace: warehouse20
+  annotations:
+    fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
 spec:
   selector:
     matchLabels:
@@ -101,7 +103,7 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-            claimName: radarr-data
+          claimName: radarr-data
       - name: media
         persistentVolumeClaim:
           claimName: media-store01
