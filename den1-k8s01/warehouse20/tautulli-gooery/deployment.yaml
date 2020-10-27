@@ -9,7 +9,7 @@ metadata:
     instance: gooery
   annotations:
     fluxcd.io/automated: 'true'
-    fluxcd.io/tag.tautulli: 'semver: > 2.5'
+    fluxcd.io/tag.tautulli: 'semver: > 2.4'
 spec:
   revisionHistoryLimit: 3
   strategy:
