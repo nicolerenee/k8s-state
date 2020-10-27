@@ -9,7 +9,7 @@ metadata:
     instance: farnsworth
   annotations:
     fluxcd.io/automated: 'true'
-    fluxcd.io/tag.tautulli: glob:v2.*
+    fluxcd.io/tag.tautulli: 'semver: > 2.5'
 spec:
   revisionHistoryLimit: 3
   strategy:
