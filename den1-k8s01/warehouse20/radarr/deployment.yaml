@@ -9,7 +9,7 @@ metadata:
   namespace: warehouse20
   annotations:
     fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
-    fluxcd.io/tag.radarr: 'glob: aphrodite-3.0.0.*'
+    fluxcd.io/tag.radarr: 'semver: > 3.0.0.0'
 spec:
   selector:
     matchLabels:
@@ -27,7 +27,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: radarr
-        image: hotio/radarr:aphrodite-3.0.0.3785
+        image: linuxserver/radarr:3.0.0.3785-ls23
         imagePullPolicy: IfNotPresent
         env:
         - name: PUID
