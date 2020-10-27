@@ -27,8 +27,8 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: radarr
-        image: hotio/radarr:aphrodite-3.0.0.3112
-        imagePullPolicy: Always
+        image: hotio/radarr:aphrodite-3.0.0.3785
+        imagePullPolicy: IfNotPresent
         env:
         - name: PUID
           value: "943"
