@@ -1,0 +1,1 @@
+{"jobID":"71678115-b9a9-4e01-a6d8-c7d635451891","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:deployment/tautulli-gooery":{"add":{"tag_all":"semver: \u003e 2.4"},"remove":{}}}},"result":null}
