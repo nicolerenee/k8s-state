@@ -28,7 +28,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: radarr
-        image: linuxserver/radarr:3.0.0.3785-ls23
+        image: linuxserver/radarr:3.0.0.3974-ls26
         imagePullPolicy: IfNotPresent
         env:
         - name: PUID
@@ -67,7 +67,7 @@ spec:
         - mountPath: /mnt/media/store01
           name: media
       - name: exportarr
-        image: onedr0p/exportarr:v0.3.3
+        image: onedr0p/exportarr:v0.3.4
         command: ["exportarr"]
         args: ["radarr"]
         env:
