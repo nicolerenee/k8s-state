@@ -9,7 +9,7 @@ metadata:
   namespace: warehouse20
   annotations:
     fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
-    fluxcd.io/tag.radarr: 'semver: > 3.0.0.0'
+    fluxcd.io/tag.radarr: 'semver: > 3.0.0 < 4'
 spec:
   selector:
     matchLabels:
