@@ -1,0 +1,1 @@
+{"jobID":"bc5ce8a7-bf79-0a0e-9d7e-4c5111f9b793","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:deployment/radarr":{"add":{"tag.radarr":"glob: 3.0.0.*"},"remove":{}}}},"result":null}
