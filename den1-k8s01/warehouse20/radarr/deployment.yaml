@@ -9,6 +9,7 @@ metadata:
   namespace: warehouse20
   annotations:
     fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
+    fluxcd.io/tag.radarr: 'glob: aphrodite-3.0.0.*'
 spec:
   selector:
     matchLabels:
