@@ -1,0 +1,1 @@
+{"jobID":"240537f1-dfab-f8a1-c3cb-3bfa1512a2ca","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:deployment/sonarr":{"add":{"tag.exportarr":"semver: \u003e 0.3.0"},"remove":{}}}},"result":null}
