@@ -1,0 +1,1 @@
+{"jobID":"741f242a-64d4-2baf-f830-a4bda9b59e9f","spec":{"type":"policy","cause":{"Message":"","User":"Nicole Renée Hubbard \u003ccode@nicole.dev\u003e"},"spec":{"warehouse20:deployment/radarr":{"add":{"automated":"true"},"remove":{}}}},"result":null}
