@@ -10,7 +10,7 @@ metadata:
   annotations:
     fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
     fluxcd.io/tag.radarr: 'glob:3.0.0.*'
-    fluxcd.io/automated: 'true'
+    fluxcd.io/automated: 'false'
 spec:
   selector:
     matchLabels:
@@ -28,7 +28,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: radarr
-        image: linuxserver/radarr:3.0.0.3790-ls29
+        image: linuxserver/radarr:3.0.0.3989-ls28
         imagePullPolicy: IfNotPresent
         env:
         - name: PUID
