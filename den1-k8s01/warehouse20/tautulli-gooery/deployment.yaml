@@ -29,6 +29,11 @@ spec:
       - name: tautulli
         image: "tautulli/tautulli:v2.6.1"
         imagePullPolicy: IfNotPresent
+        command:
+          - python
+          - Tautulli.py
+          - --datadir
+          - /config
         env:
         - name: TZ
           value: "Etc/UTC"
