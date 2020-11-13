@@ -24,7 +24,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: farnsworth
-        image: plexinc/pms-docker:1.20.1.3252-a78fef9a9
+        image: plexinc/pms-docker:1.20.4.3517-ab5e1197c
         env:
         - name: ADVERTISE_IP
           value: "https://farnsworth.warehouse20.com/,http://plex-farnsworth:32400/"
