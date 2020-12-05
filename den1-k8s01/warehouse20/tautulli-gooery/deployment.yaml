@@ -27,13 +27,13 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: tautulli
-        image: "tautulli/tautulli:v2.6.1"
+        image: "tautulli/tautulli:v2.6.2"
         imagePullPolicy: IfNotPresent
         command:
-          - python
-          - Tautulli.py
-          - --datadir
-          - /config
+        - python
+        - Tautulli.py
+        - --datadir
+        - /config
         env:
         - name: TZ
           value: "Etc/UTC"
