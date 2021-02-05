@@ -16,6 +16,12 @@ spec:
       - backend:
           serviceName: organizr
           servicePort: http
+  - host: www.warehouse20.com
+    http:
+      paths:
+      - backend:
+          serviceName: organizr
+          servicePort: http
   tls:
   - hosts:
     - warehouse20.com
