@@ -45,5 +45,6 @@ spec:
         - unifi.freckle.tech
         secretName: unifi-tls
     persistence:
+      enabled: true
       size: 40Gi
       storageClass: rook-ceph-block
