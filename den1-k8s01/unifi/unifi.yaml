@@ -8,6 +8,9 @@ metadata:
     fluxcd.io/automated: "false"
     fluxcd.io/tag.chart-image: semver:~4.0
 spec:
+  image:
+    repository: jacobalberty/unifi
+    tag: 6.1.71
   releaseName: unifi
   chart:
     repository: https://k8s-at-home.com/charts/
