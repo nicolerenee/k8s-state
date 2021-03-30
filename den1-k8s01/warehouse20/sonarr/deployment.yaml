@@ -12,7 +12,7 @@ metadata:
     # figure out how to disable updates on sonarr or find a new
     # fluxcd.io/tag.exporter: semver:~v0.1
     fluxcd.io/automated: 'true'
-    fluxcd.io/tag.sonarr: glob:version-3.
+    fluxcd.io/tag.sonarr: glob:version-3.*
 spec:
   selector:
     matchLabels:
