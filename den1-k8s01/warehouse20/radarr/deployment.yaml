@@ -10,7 +10,7 @@ metadata:
   annotations:
     fluxcd.io/tag.exportarr: 'semver: > 0.3.0'
     fluxcd.io/tag.radarr: 'glob:3.*'
-    fluxcd.io/automated: 'false'
+    fluxcd.io/automated: 'true'
 spec:
   selector:
     matchLabels:
