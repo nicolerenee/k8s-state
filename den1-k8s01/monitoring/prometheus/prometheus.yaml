@@ -12,7 +12,7 @@ spec:
   chart:
     repository: https://charts.bitnami.com/bitnami
     name: kube-prometheus
-    version: 2.0.1
+    version: 4.2.2
   values:
     global:
       storageClass: rook-ceph-block
@@ -24,6 +24,7 @@ spec:
         name: prometheus-operator-prometheus-scrape-config
         key: additional-scrape-configs.yaml
       logLevel: error
+      scrapeInterval: 30s
       replicaCount: 1
       retention: 90d
       persistence:
