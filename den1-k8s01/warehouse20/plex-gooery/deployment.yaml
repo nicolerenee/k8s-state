@@ -27,7 +27,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: plex
-        image: plexinc/pms-docker:1.22.3.4392-d7c624def
+        image: plexinc/pms-docker:1.22.3.4523-d0ce30438
         env:
         - name: ADVERTISE_IP
           value: "https://gooery.warehouse20.com/,http://plex-gooery:32400/"
