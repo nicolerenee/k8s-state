@@ -28,7 +28,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: radarr
-        image: linuxserver/radarr:3.1.1.4954-ls104
+        image: linuxserver/radarr:3.2.0.5048-ls104
         imagePullPolicy: IfNotPresent
         env:
         - name: PUID
