@@ -4,7 +4,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/auth-url: "http://organizr.warehouse20.svc.cluster.local/api/?v1/auth&group=1"
+    nginx.ingress.kubernetes.io/auth-url: "http://organizr.warehouse20.svc.cluster.local/api/v2/auth?group=1"
     nginx.ingress.kubernetes.io/auth-signin: "https://warehouse20.com/?error=401"
   labels:
     app.kubernetes.io/name: sonarr
