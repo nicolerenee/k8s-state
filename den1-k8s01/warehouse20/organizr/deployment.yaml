@@ -21,7 +21,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: organizr
-        image: organizrtools/organizr-v2:latest
+        image: organizr/organizr:latest
         imagePullPolicy: Always
         ports:
         - name: http
