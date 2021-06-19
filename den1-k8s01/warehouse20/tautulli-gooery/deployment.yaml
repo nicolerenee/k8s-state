@@ -27,7 +27,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: tautulli
-        image: "tautulli/tautulli:v2.7.3"
+        image: "tautulli/tautulli:v2.7.4"
         imagePullPolicy: IfNotPresent
         command:
         - python
