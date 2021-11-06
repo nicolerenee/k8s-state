@@ -7,6 +7,9 @@ metadata:
   labels:
     app: plex
     instance: farnsworth
+  annotations:
+     fluxcd.io/automated: 'true'
+     fluxcd.io/tag.plex: glob:1.*
 spec:
   revisionHistoryLimit: 3
   strategy:
