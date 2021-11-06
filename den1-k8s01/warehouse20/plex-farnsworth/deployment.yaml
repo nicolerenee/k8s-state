@@ -45,8 +45,8 @@ spec:
             path: /identity
             port: https
         readinessProbe:
-          initialDelaySeconds: 20
-          failureThreshold: 5
+          initialDelaySeconds: 5
+          failureThreshold: 10
           timeoutSeconds: 5
           httpGet:
             path: /identity
