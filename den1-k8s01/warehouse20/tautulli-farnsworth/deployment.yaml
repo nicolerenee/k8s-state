@@ -27,7 +27,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: tautulli
-        image: "tautulli/tautulli:v2.7.5"
+        image: "tautulli/tautulli:v2.7.7"
         imagePullPolicy: IfNotPresent
         env:
         - name: PUID
