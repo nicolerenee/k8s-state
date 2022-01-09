@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rook-operator-den1-k8s01
+  name: rook-ceph-operator-den1-k8s01
   namespace: argocd
 spec:
   destination:

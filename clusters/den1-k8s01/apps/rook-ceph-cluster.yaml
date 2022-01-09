@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rook-ceph-cluster-den1-k8s01
+  namespace: argocd
+spec:
+  destination:
+    name: den1-k8s01
+    namespace: rook-ceph
+  project: rook-ceph
+  source:
+    repoURL: https://charts.rook.io/release
+    chart: rook-ceph-cluster
+    targetRevision: 1.8.2
+    helm:
+      releaseName: rook-ceph-cluster
+      values: |
+        monitoring:
+          enabled: false
+        toolbox:
+          enabled: true
+        ingress:
+          dashboard: {}
+        # TODO: REMOVE - Temporary until fully migrated until new cluster.
+        cephClusterSpec:
+          mon:
+            count: 1
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
