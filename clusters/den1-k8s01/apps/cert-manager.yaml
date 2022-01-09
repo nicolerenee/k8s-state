@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-den1-k8s01
+  namespace: argocd
+spec:
+  destination:
+    name: den1-k8s01
+    namespace: cert-manager
+  project: cert-manager
+  source:
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: 1.6.1
+    helm:
+      releaseName: cert-manager
+      values: |
+        installCRDs=true
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
