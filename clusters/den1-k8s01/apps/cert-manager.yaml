@@ -16,6 +16,10 @@ spec:
       releaseName: cert-manager
       values: |
         installCRDs: true
+        global:
+          leaderElection:
+            # Override the namespace used to store the ConfigMap for leader election
+            namespace: "cert-manager"
   syncPolicy:
     automated:
       selfHeal: true
