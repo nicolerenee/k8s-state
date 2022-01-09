@@ -15,7 +15,7 @@ spec:
     helm:
       releaseName: cert-manager
       values: |
-        installCRDs=true
+        installCRDs: true
   syncPolicy:
     automated:
       selfHeal: true
