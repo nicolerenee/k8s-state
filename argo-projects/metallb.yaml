@@ -1,0 +1,18 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: '1'
+  name: metallb
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - name: '*'
+    namespace: ingress-nginx
+    server: '*'
+  sourceRepos:
+  - https://metallb.github.io/metallb

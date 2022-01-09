@@ -13,6 +13,7 @@ spec:
     chart: ingress-nginx
     targetRevision: 4.0.13
     helm:
+      releaseName: ingress-nginx
       values: |
         controller:
           replicaCount: 3

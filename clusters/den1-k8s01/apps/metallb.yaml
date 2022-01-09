@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb-den1-k8s01
+  namespace: argocd
+spec:
+  destination:
+    name: den1-k8s01
+    namespace: metallb
+  project: metallb
+  source:
+    repoURL: https://metallb.github.io/metallb
+    chart: metallb
+    targetRevision: 0.11.0
+    helm:
+      releaseName: metallb
+      values: |
+        speaker:
+          enabled: false
+        configInline:
+          address-pools:
+          - name: internal
+            protocol: bgp
+            auto-assign: true
+            addresses:
+            - 172.26.10.0/24
+          - name: public
+            protocol: bgp
+            auto-assign: false
+            addresses:
+            - 72.18.145.240/28
+            - 2607:fc88:200:4f0:2:1::/112
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
