@@ -1,0 +1,18 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-projects
+  namespace: argocd
+spec:
+  syncPolicy:
+    automated:
+      selfHeal: true
+  destination:
+    namespace: argocd
+    name: den1-k8s01
+  project: apps
+  source:
+    path: argo-projects
+    repoURL: https://github.com/nicolerenee/k8s-state.git
+    targetRevision: HEAD

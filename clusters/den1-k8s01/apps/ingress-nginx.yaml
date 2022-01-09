@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx-den1-k8s01
+  namespace: argocd
+spec:
+  destination:
+    name: den1-k8s01
+    namespace: ingress-nginx
+  project: ingress-nginx
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.0.13
+    helm:
+      values: |
+        controller:
+          replicaCount: 3
+          ingressClassResource:
+            name: nginx
+            enabled: true
+            default: true
+            controllerValue: "k8s.freckle.tech/ingress-nginx"
+          resources:
+            requests:
+              cpu: 500m
+              memory: 200Mi
+          # publishService:
+          #   enabled: true
+          metrics:
+            enabled: true
+            # serviceMonitor:
+              # enabled: true
+          service:
+            type: LoadBalancer
+            ipFamilyPolicy: PreferDualStack
+            ipFamilies:
+              - IPv4
+              - IPv6
+            externalTrafficPolicy: Local
+            annotations:
+              metallb.universe.tf/address-pool: public
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
