@@ -12,7 +12,7 @@ spec:
     kind: '*'
   destinations:
   - name: '*'
-    namespace: ingress-nginx
+    namespace: metallb
     server: '*'
   sourceRepos:
   - https://metallb.github.io/metallb
